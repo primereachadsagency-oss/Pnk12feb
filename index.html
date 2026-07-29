@@ -15,17 +15,18 @@
 <style>
 
 :root {
-  --bg-deep: #0a1510;
-  --bg-card: #122a21;
-  --bg-card-light: #173529;
+  --bg-deep: #08090f;
+  --bg-card: #10131c;
+  --bg-card-light: #161a28;
   --gold: #d4af37;
   --gold-light: #f6e27a;
-  --gold-glow: rgba(212, 175, 55, 0.35);
-  --text-primary: #eaf5f0;
-  --text-secondary: #a9cfc2;
-  --text-muted: #7aa99b;
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-gold: rgba(212,175,55,0.3);
+  --gold-glow: rgba(212, 175, 55, 0.3);
+  --text-primary: #e8ecf4;
+  --text-secondary: #8e95a8;
+  --text-muted: #5a6175;
+  --border-subtle: rgba(255,255,255,0.05);
+  --border-gold: rgba(212,175,55,0.25);
+  --surface: rgba(255,255,255,0.025);
 }
 
 * {
@@ -46,6 +47,7 @@ body {
   position: relative;
 }
 
+/* ===== BG — different pattern from other pages ===== */
 .bg-layer {
   position: fixed;
   inset: 0;
@@ -57,38 +59,49 @@ body {
 .bg-layer .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: orbFloat 12s ease-in-out infinite alternate;
+  filter: blur(100px);
+  animation: orbFloat 16s ease-in-out infinite alternate;
 }
 
 .bg-layer .orb:nth-child(1) {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
-  top: -80px; left: -60px;
-  animation-duration: 14s;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(212,175,55,0.12), transparent 70%);
+  top: -60px; right: -40px;
+  animation-duration: 18s;
 }
 
 .bg-layer .orb:nth-child(2) {
-  width: 250px; height: 250px;
-  background: radial-gradient(circle, rgba(246,226,122,0.15), transparent 70%);
-  bottom: -60px; right: -40px;
-  animation-duration: 10s;
-  animation-delay: -4s;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(246,226,122,0.06), transparent 70%);
+  bottom: 10%; left: -30px;
+  animation-duration: 13s;
+  animation-delay: -5s;
 }
 
 .bg-layer .orb:nth-child(3) {
-  width: 180px; height: 180px;
-  background: radial-gradient(circle, rgba(212,175,55,0.12), transparent 70%);
-  top: 50%; left: 60%;
-  animation-duration: 16s;
-  animation-delay: -8s;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 70%);
+  top: 40%; right: 20%;
+  animation-duration: 20s;
+  animation-delay: -10s;
 }
 
 @keyframes orbFloat {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(30px, -20px) scale(1.1); }
-  100% { transform: translate(-20px, 30px) scale(0.95); }
+  50%  { transform: translate(20px, -15px) scale(1.06); }
+  100% { transform: translate(-15px, 20px) scale(0.96); }
+}
+
+/* Grid pattern overlay */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 #particles {
@@ -98,17 +111,18 @@ body {
   pointer-events: none;
 }
 
+/* ===== CARD ===== */
 .wrapper {
   position: relative;
   z-index: 10;
   width: 100%;
   max-width: 430px;
   margin: 20px;
-  background: linear-gradient(170deg, var(--bg-card-light), var(--bg-card));
+  background: linear-gradient(175deg, var(--bg-card-light), var(--bg-card) 60%, #0d1019);
   border-radius: 28px;
-  padding: 36px 24px 32px;
+  padding: 32px 22px 28px;
   box-shadow:
-    0 25px 70px rgba(0,0,0,0.6),
+    0 30px 80px rgba(0,0,0,0.7),
     0 0 0 1px var(--border-subtle),
     inset 0 1px 0 rgba(255,255,255,0.04);
   text-align: center;
@@ -116,78 +130,71 @@ body {
 }
 
 @keyframes cardEntry {
-  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  from { opacity: 0; transform: translateY(35px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.logo-wrap {
+/* ===== PROFILE — different style: soft glow instead of spinning ring ===== */
+.profile-section {
   position: relative;
   display: inline-block;
   margin-bottom: 4px;
 }
 
-.logo-ring {
+.profile-glow {
   position: absolute;
-  inset: -8px;
+  inset: -14px;
   border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: var(--gold);
-  border-right-color: var(--gold-light);
-  animation: ringRotate 3s linear infinite;
+  background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
 }
 
-.logo-ring-inner {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  border-bottom-color: rgba(212,175,55,0.4);
-  border-left-color: rgba(246,226,122,0.2);
-  animation: ringRotate 5s linear infinite reverse;
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.05); }
 }
 
-@keyframes ringRotate {
-  to { transform: rotate(360deg); }
-}
-
-.logo {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  padding: 5px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+.profile-border {
   position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 0deg, var(--gold), var(--gold-light), var(--gold-dim, #9a7b1a), var(--gold));
+  animation: borderSpin 6s linear infinite;
   z-index: 2;
 }
 
-.logo img {
+@keyframes borderSpin {
+  to { background: conic-gradient(from 360deg, var(--gold), var(--gold-light), var(--gold-dim, #9a7b1a), var(--gold)); }
+}
+
+.profile-border img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  background: #0a1510;
+  background: var(--bg-deep);
   display: block;
 }
 
+/* ===== TEXT ===== */
 h1 {
   margin-top: 18px;
-  font-size: 26px;
-  font-weight: 700;
-  background: linear-gradient(90deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
   letter-spacing: -0.3px;
 }
 
 .tagline {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  margin-top: 5px;
+  margin-top: 4px;
   font-weight: 400;
 }
 
-/* ===== CTA - Compact size ===== */
+/* ===== CTA ===== */
 .cta {
   margin-top: 20px;
 }
@@ -197,26 +204,25 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px 22px;
+  padding: 12px 24px;
   font-size: 14px;
-  font-weight: 600;
-  border-radius: 12px;
+  font-weight: 700;
+  border-radius: 14px;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
   color: var(--bg-deep);
   text-decoration: none;
-  box-shadow:
-    0 4px 16px var(--gold-glow),
-    0 1px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px var(--gold-glow);
   transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
+  animation: ctaPulse 2.4s ease-in-out infinite;
 }
 
 .cta a::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
   transform: translateX(-100%);
   transition: transform 0.4s ease;
 }
@@ -227,20 +233,16 @@ h1 {
 
 .cta a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(212,175,55,0.45);
+  box-shadow: 0 8px 30px rgba(212,175,55,0.45);
 }
 
 .cta a:active {
-  transform: translateY(0) scale(0.97);
-}
-
-.cta-pulse {
-  animation: ctaPulse 2.2s ease-in-out infinite;
+  transform: scale(0.97);
 }
 
 @keyframes ctaPulse {
-  0%, 100% { box-shadow: 0 4px 16px var(--gold-glow); }
-  50%      { box-shadow: 0 4px 28px rgba(212,175,55,0.5), 0 0 0 6px rgba(212,175,55,0.08); }
+  0%, 100% { box-shadow: 0 4px 20px var(--gold-glow); }
+  50%      { box-shadow: 0 4px 32px rgba(212,175,55,0.45), 0 0 0 5px rgba(212,175,55,0.06); }
 }
 
 .cta-icon {
@@ -251,11 +253,11 @@ h1 {
 
 /* ===== TIMER ===== */
 .timer-box {
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: rgba(212,175,55,0.07);
-  border: 1px dashed rgba(246,226,122,0.3);
-  border-radius: 12px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
 }
@@ -264,8 +266,8 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(246,226,122,0.03), transparent);
-  animation: shimmer 2.5s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.02), transparent);
+  animation: shimmer 2.8s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -274,18 +276,18 @@ h1 {
 }
 
 .timer-text {
-  font-size: 12px;
-  color: var(--gold-light);
+  font-size: 11px;
+  color: var(--text-muted);
   position: relative;
   z-index: 1;
 }
 
 .timer-count {
   font-weight: 800;
-  font-size: 16px;
-  color: #ffffff;
+  font-size: 15px;
+  color: var(--gold-light);
   display: inline-block;
-  min-width: 18px;
+  min-width: 16px;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -294,10 +296,10 @@ h1 {
 }
 
 .timer-progress {
-  margin-top: 8px;
-  height: 3px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 3px;
+  margin-top: 7px;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 2px;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -305,64 +307,60 @@ h1 {
 
 .timer-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light));
-  border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold-dim, #9a7b1a), var(--gold));
+  border-radius: 2px;
   transition: width 1s linear;
-  box-shadow: 0 0 6px var(--gold-glow);
 }
 
-/* ===== INFO BOX ===== */
-.info-box {
+/* ===== FEATURES — icon cards instead of checklist ===== */
+.features {
   margin-top: 18px;
-  background: rgba(255,255,255,0.03);
-  border-radius: 14px;
-  padding: 14px 16px;
-  text-align: left;
-  border: 1px solid var(--border-subtle);
-  animation: fadeSlideUp 0.6s 0.3s both;
-}
-
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.info-box ul {
-  list-style: none;
-}
-
-.info-box li {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
-  font-size: 13px;
-  padding: 6px 0;
-  color: var(--text-primary);
-  line-height: 1.5;
 }
 
-.info-box li + li {
-  border-top: 1px solid rgba(255,255,255,0.04);
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.25s ease;
 }
 
-.check-icon {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(212,175,55,0.12);
+.feature-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+.feature-card .f-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(212,175,55,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1px;
+  margin: 0 auto 8px;
+  font-size: 16px;
 }
 
-.check-icon svg {
-  width: 10px;
-  height: 10px;
+.feature-card h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
 }
 
-/* ===== SECONDARY CTAs ===== */
+.feature-card p {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ===== SECONDARY ROW ===== */
 .cta-row {
   margin-top: 14px;
   display: flex;
@@ -377,9 +375,9 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 10px 10px;
-  font-size: 12px;
+  gap: 5px;
+  padding: 10px 8px;
+  font-size: 11px;
   font-weight: 600;
   border-radius: 10px;
   background: transparent;
@@ -390,39 +388,40 @@ h1 {
 }
 
 .cta-secondary a:hover {
-  background: rgba(212,175,55,0.08);
+  background: rgba(212,175,55,0.06);
   border-color: var(--gold);
   transform: translateY(-1px);
 }
 
-/* ===== COPY LINK ===== */
 .copy-wrap {
-  margin-top: 10px;
+  flex: 1;
 }
 
 .copy-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.04);
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: var(--surface);
   color: var(--text-muted);
   font-size: 11px;
-  font-weight: 500;
-  border: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: all 0.25s ease;
   font-family: "Poppins", sans-serif;
 }
 
 .copy-btn:hover {
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.05);
   color: var(--text-secondary);
 }
 
 .copy-btn.copied {
-  background: rgba(212,175,55,0.12);
+  background: rgba(212,175,55,0.08);
   border-color: var(--border-gold);
   color: var(--gold-light);
 }
@@ -430,12 +429,12 @@ h1 {
 /* ===== TRUST ===== */
 .trust {
   margin-top: 14px;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .trust-dots {
@@ -444,11 +443,11 @@ h1 {
 }
 
 .trust-dot {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--gold);
-  opacity: 0.6;
+  opacity: 0.5;
   animation: dotPulse 1.5s ease-in-out infinite;
 }
 
@@ -456,8 +455,8 @@ h1 {
 .trust-dot:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes dotPulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50%      { opacity: 1; transform: scale(1.1); }
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.2); }
 }
 
 .disclaimer {
@@ -465,13 +464,13 @@ h1 {
   font-size: 10px;
   color: var(--text-muted);
   line-height: 1.7;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .netad-btn {
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .netad-btn a {
@@ -480,18 +479,17 @@ h1 {
   gap: 5px;
   padding: 7px 14px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.03);
+  background: var(--surface);
   color: var(--gold);
   font-size: 10px;
   font-weight: 500;
   text-decoration: none;
-  border: 1px solid rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.12);
   transition: all 0.25s ease;
-  letter-spacing: 0.2px;
 }
 
 .netad-btn a:hover {
-  background: rgba(212,175,55,0.08);
+  background: rgba(212,175,55,0.06);
   border-color: var(--border-gold);
 }
 
@@ -500,9 +498,9 @@ h1 {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(5, 12, 8, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(6, 7, 12, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -526,25 +524,25 @@ h1 {
 }
 
 @keyframes overlayPop {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  from { opacity: 0; transform: translateY(25px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.redirect-card .redirect-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+.redirect-card .r-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+  margin: 0 auto 18px;
   box-shadow: 0 6px 24px var(--gold-glow);
 }
 
-.redirect-card .redirect-icon svg {
-  width: 26px;
-  height: 26px;
+.redirect-card .r-icon svg {
+  width: 24px;
+  height: 24px;
   color: var(--bg-deep);
 }
 
@@ -558,11 +556,11 @@ h1 {
 .redirect-card p {
   font-size: 13px;
   color: var(--text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   line-height: 1.6;
 }
 
-.redirect-card .overlay-cta {
+.redirect-card .ov-cta {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -571,25 +569,24 @@ h1 {
   padding: 13px 20px;
   font-size: 15px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 14px;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
   color: var(--bg-deep);
   text-decoration: none;
-  box-shadow: 0 6px 28px var(--gold-glow);
+  box-shadow: 0 6px 24px var(--gold-glow);
   transition: all 0.25s ease;
-  animation: ctaPulse 2.2s ease-in-out infinite;
+  animation: ctaPulse 2.4s ease-in-out infinite;
 }
 
-.redirect-card .overlay-cta:hover {
+.redirect-card .ov-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(212,175,55,0.5);
 }
 
-.redirect-card .overlay-cta:active {
+.redirect-card .ov-cta:active {
   transform: scale(0.97);
 }
 
-.redirect-card .overlay-tg {
+.redirect-card .ov-tg {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -599,7 +596,7 @@ h1 {
   padding: 11px 16px;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 12px;
   background: transparent;
   color: var(--gold-light);
   text-decoration: none;
@@ -607,51 +604,52 @@ h1 {
   transition: all 0.25s ease;
 }
 
-.redirect-card .overlay-tg:hover {
-  background: rgba(212,175,55,0.08);
+.redirect-card .ov-tg:hover {
+  background: rgba(212,175,55,0.06);
   border-color: var(--gold);
 }
 
-.redirect-card .overlay-copy {
+.redirect-card .ov-copy {
   margin-top: 12px;
   padding: 9px 16px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  background: var(--surface);
   color: var(--text-muted);
   font-size: 11px;
   font-weight: 500;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: all 0.25s ease;
   font-family: "Poppins", sans-serif;
 }
 
-.redirect-card .overlay-copy:hover {
-  background: rgba(255,255,255,0.08);
+.redirect-card .ov-copy:hover {
+  background: rgba(255,255,255,0.05);
   color: var(--text-secondary);
 }
 
-.redirect-card .overlay-copy.copied {
-  background: rgba(212,175,55,0.12);
+.redirect-card .ov-copy.copied {
+  background: rgba(212,175,55,0.08);
   border-color: var(--border-gold);
   color: var(--gold-light);
 }
 
-.redirect-card .overlay-hint {
+.redirect-card .ov-hint {
   margin-top: 16px;
   font-size: 10px;
   color: var(--text-muted);
-  opacity: 0.7;
+  opacity: 0.6;
   line-height: 1.6;
 }
 
 @media (max-width: 460px) {
   .wrapper {
     margin: 12px;
-    padding: 28px 18px 24px;
+    padding: 26px 16px 22px;
     border-radius: 22px;
   }
-  h1 { font-size: 23px; }
+  h1 { font-size: 21px; }
+  .features { gap: 6px; }
   .cta-row { flex-direction: column; }
 }
 
@@ -692,15 +690,15 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
   <div class="orb"></div>
   <div class="orb"></div>
 </div>
-
+<div class="bg-grid" aria-hidden="true"></div>
 <canvas id="particles" aria-hidden="true"></canvas>
 
 <div class="wrapper">
 
-  <div class="logo-wrap">
-    <div class="logo-ring"></div>
-    <div class="logo-ring-inner"></div>
-    <div class="logo">
+  <!-- Profile — soft glow instead of spinning ring -->
+  <div class="profile-section">
+    <div class="profile-glow"></div>
+    <div class="profile-border">
       <img src="https://original.netadexpert.live/wp-content/uploads/2026/07/PHOTO-2026-07-21-10-03-43.jpg" alt="Pankaj Bhardwaj">
     </div>
   </div>
@@ -708,14 +706,15 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
   <h1>Pankaj Bhardwaj</h1>
   <div class="tagline">Learn More &bull; Earn More</div>
 
-  <!-- Main CTA - compact + Subscribe event -->
+  <!-- Main CTA -->
   <div class="cta">
-    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" class="cta-pulse" onclick="trackSubscribe()">
+    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" onclick="trackSubscribe()">
       <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855.075 1.644.418 1.955.34.31.7.534 1.01.71l.022.012 4.52 2.576c.379.716.848 1.602 1.19 2.246.207.378.373.677.483.87l.064.112.018.032c.21.37.486.672.85.863.366.192.737.21 1.066.132a1.96 1.96 0 0 0 .653-.295l.005-.004 2.38-1.923 3.024 2.633.018.015a2.08 2.08 0 0 0 1.536.438c.57-.066 1.015-.37 1.288-.695.27-.322.397-.67.456-.903l.003-.014 2.965-13.174c.141-.627.055-1.167-.19-1.574-.243-.404-.63-.637-1.002-.747a2.07 2.07 0 0 0-.562-.074z"/><path d="M14.5 14.5l-2 4" stroke-width="1.5"/></svg>
       Join Free Telegram Channel
     </a>
   </div>
 
+  <!-- Timer — subtle style -->
   <div class="timer-box">
     <div class="timer-text">
       Auto redirecting in <span id="countdown" class="timer-count">15</span> seconds
@@ -725,40 +724,35 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <div class="info-box">
-    <ul>
-      <li>
-        <span class="check-icon">
-          <svg viewBox="0 0 12 12" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
-        </span>
-        Share Market Fundamentals — Zero to Hero
-      </li>
-      <li>
-        <span class="check-icon">
-          <svg viewBox="0 0 12 12" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
-        </span>
-        Chart Reading & Technical Analysis Simplified
-      </li>
-      <li>
-        <span class="check-icon">
-          <svg viewBox="0 0 12 12" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
-        </span>
-        Money Management & Risk Control Techniques
-      </li>
-      <li>
-        <span class="check-icon">
-          <svg viewBox="0 0 12 12" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
-        </span>
-        100% Free Education — No Paid Services
-      </li>
-    </ul>
+  <!-- Features — 2x2 grid cards instead of checklist -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="f-icon">📊</div>
+      <h3>Market Basics</h3>
+      <p>Zero to Hero</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon">📈</div>
+      <h3>Chart Reading</h3>
+      <p>Technical Analysis</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon">💰</div>
+      <h3>Risk Control</h3>
+      <p>Money Management</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon">🎓</div>
+      <h3>100% Free</h3>
+      <p>No Paid Services</p>
+    </div>
   </div>
 
-  <!-- Side by side secondary buttons + Subscribe event on both -->
+  <!-- Secondary row -->
   <div class="cta-row">
     <div class="cta-secondary">
       <a href="tg://join?invite=dLl4s-08kQ5kMjM1" onclick="trackSubscribe()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         Open App
       </a>
     </div>
@@ -793,27 +787,27 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
 
 </div>
 
-<!-- Overlay - timer ke baad dikhega -->
+<!-- Overlay -->
 <div class="redirect-overlay" id="redirectOverlay">
   <div class="redirect-card">
-    <div class="redirect-icon">
+    <div class="r-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855.075 1.644.418 1.955.34.31.7.534 1.01.71l.022.012 4.52 2.576c.379.716.848 1.602 1.19 2.246.207.378.373.677.483.87l.064.112.018.032c.21.37.486.672.85.863.366.192.737.21 1.066.132a1.96 1.96 0 0 0 .653-.295l.005-.004 2.38-1.923 3.024 2.633.018.015a2.08 2.08 0 0 0 1.536.438c.57-.066 1.015-.37 1.288-.695.27-.322.397-.67.456-.903l.003-.014 2.965-13.174c.141-.627.055-1.167-.19-1.574-.243-.404-.63-.637-1.002-.747a2.07 2.07 0 0 0-.562-.074z"/><path d="M14.5 14.5l-2 4" stroke-width="1.5"/></svg>
     </div>
     <h2>You're Almost There!</h2>
     <p>Tap below to join Pankaj Bhardwaj's free Telegram channel.</p>
-    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" class="overlay-cta" onclick="trackSubscribe()">
+    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" class="ov-cta" onclick="trackSubscribe()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       Tap to Join Channel
     </a>
-    <a href="tg://join?invite=3IhpWW5mzNs4ODA1" class="overlay-tg" onclick="trackSubscribe()">
+    <a href="tg://join?invite=dLl4s-08kQ5kMjM1" class="ov-tg" onclick="trackSubscribe()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       Open in Telegram App
     </a>
-    <button class="overlay-copy" id="overlayCopyBtn" onclick="copyLinkOverlay()">
+    <button class="ov-copy" id="overlayCopyBtn" onclick="copyLinkOverlay()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       Copy Link & Open Manually
     </button>
-    <div class="overlay-hint">If nothing happens, copy the link and paste it in your browser or Telegram app</div>
+    <div class="ov-hint">If nothing happens, copy the link and paste it in your browser or Telegram app</div>
   </div>
 </div>
 
@@ -822,7 +816,7 @@ var TG_WEB_LINK = "https://t.me/+dLl4s-08kQ5kMjM1";
 var TG_APP_LINK = "tg://join?invite=dLl4s-08kQ5kMjM1";
 var redirectAttempted = false;
 
-/* ===== Meta Pixel — Subscribe event har CTA pe ===== */
+/* ===== Meta Pixel Events ===== */
 function trackSubscribe() {
   if (typeof fbq === 'function') {
     fbq('track', 'Subscribe');
@@ -915,18 +909,15 @@ function tryAutoRedirect(overlay) {
   if (redirectAttempted) return;
   redirectAttempted = true;
 
-  /* Try tg:// via hidden iframe */
   var f = document.createElement("iframe");
   f.style.display = "none";
   f.src = TG_APP_LINK;
   document.body.appendChild(f);
 
-  /* Try window.location */
   setTimeout(function() {
     window.location.href = TG_WEB_LINK;
   }, 300);
 
-  /* Fallback: show overlay with tap button */
   setTimeout(function() {
     if (f.parentNode) f.parentNode.removeChild(f);
     if (overlay) overlay.classList.add("active");
@@ -938,7 +929,7 @@ function tryAutoRedirect(overlay) {
   var canvas = document.getElementById("particles");
   var ctx = canvas.getContext("2d");
   var particles = [];
-  var COUNT = 35;
+  var COUNT = 25;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -953,12 +944,12 @@ function tryAutoRedirect(overlay) {
   P.prototype.reset = function() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
-    this.s = Math.random() * 2 + 0.5;
-    this.dx = (Math.random() - 0.5) * 0.3;
-    this.dy = (Math.random() - 0.5) * 0.3;
-    this.o = Math.random() * 0.3 + 0.05;
+    this.s = Math.random() * 1.5 + 0.3;
+    this.dx = (Math.random() - 0.5) * 0.2;
+    this.dy = (Math.random() - 0.5) * 0.2;
+    this.o = Math.random() * 0.2 + 0.03;
     this.p = Math.random() * Math.PI * 2;
-    this.ps = Math.random() * 0.02 + 0.005;
+    this.ps = Math.random() * 0.012 + 0.004;
   };
   P.prototype.update = function() {
     this.x += this.dx;
@@ -967,7 +958,7 @@ function tryAutoRedirect(overlay) {
     if (this.x < -10 || this.x > canvas.width + 10 || this.y < -10 || this.y > canvas.height + 10) this.reset();
   };
   P.prototype.draw = function() {
-    var a = this.o * (0.6 + 0.4 * Math.sin(this.p));
+    var a = this.o * (0.5 + 0.5 * Math.sin(this.p));
     ctx.beginPath();
     ctx.arc(this.x, this.y, Math.max(0.1, this.s), 0, Math.PI * 2);
     ctx.fillStyle = "rgba(212,175,55," + a + ")";
