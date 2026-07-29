@@ -47,7 +47,6 @@ body {
   position: relative;
 }
 
-/* ===== BG — different pattern from other pages ===== */
 .bg-layer {
   position: fixed;
   inset: 0;
@@ -92,7 +91,6 @@ body {
   100% { transform: translate(-15px, 20px) scale(0.96); }
 }
 
-/* Grid pattern overlay */
 .bg-grid {
   position: fixed;
   inset: 0;
@@ -111,7 +109,6 @@ body {
   pointer-events: none;
 }
 
-/* ===== CARD ===== */
 .wrapper {
   position: relative;
   z-index: 10;
@@ -134,7 +131,6 @@ body {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ===== PROFILE — different style: soft glow instead of spinning ring ===== */
 .profile-section {
   position: relative;
   display: inline-block;
@@ -178,7 +174,6 @@ body {
   display: block;
 }
 
-/* ===== TEXT ===== */
 h1 {
   margin-top: 18px;
   font-size: 24px;
@@ -194,18 +189,17 @@ h1 {
   font-weight: 400;
 }
 
-/* ===== CTA ===== */
 .cta {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
-.cta a {
+.cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
-  font-size: 14px;
+  padding: 14px 28px;
+  font-size: 15px;
   font-weight: 700;
   border-radius: 14px;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
@@ -215,10 +209,13 @@ h1 {
   transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  border: none;
+  font-family: "Poppins", sans-serif;
   animation: ctaPulse 2.4s ease-in-out infinite;
 }
 
-.cta a::after {
+.cta-btn::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -227,16 +224,16 @@ h1 {
   transition: transform 0.4s ease;
 }
 
-.cta a:hover::after {
+.cta-btn:hover::after {
   transform: translateX(100%);
 }
 
-.cta a:hover {
+.cta-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(212,175,55,0.45);
 }
 
-.cta a:active {
+.cta-btn:active {
   transform: scale(0.97);
 }
 
@@ -246,12 +243,18 @@ h1 {
 }
 
 .cta-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 
-/* ===== TIMER ===== */
+.cta-hint {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
 .timer-box {
   margin-top: 14px;
   padding: 10px 14px;
@@ -312,7 +315,6 @@ h1 {
   transition: width 1s linear;
 }
 
-/* ===== FEATURES — icon cards instead of checklist ===== */
 .features {
   margin-top: 18px;
   display: grid;
@@ -360,75 +362,8 @@ h1 {
   line-height: 1.4;
 }
 
-/* ===== SECONDARY ROW ===== */
-.cta-row {
-  margin-top: 14px;
-  display: flex;
-  gap: 8px;
-}
-
-.cta-secondary {
-  flex: 1;
-}
-
-.cta-secondary a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 10px 8px;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--gold-light);
-  text-decoration: none;
-  border: 1.5px solid var(--border-gold);
-  transition: all 0.25s ease;
-}
-
-.cta-secondary a:hover {
-  background: rgba(212,175,55,0.06);
-  border-color: var(--gold);
-  transform: translateY(-1px);
-}
-
-.copy-wrap {
-  flex: 1;
-}
-
-.copy-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 100%;
-  padding: 10px 8px;
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 600;
-  border: 1px solid var(--border-subtle);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: "Poppins", sans-serif;
-}
-
-.copy-btn:hover {
-  background: rgba(255,255,255,0.05);
-  color: var(--text-secondary);
-}
-
-.copy-btn.copied {
-  background: rgba(212,175,55,0.08);
-  border-color: var(--border-gold);
-  color: var(--gold-light);
-}
-
-/* ===== TRUST ===== */
 .trust {
-  margin-top: 14px;
+  margin-top: 16px;
   font-size: 11px;
   color: var(--text-muted);
   display: flex;
@@ -493,155 +428,6 @@ h1 {
   border-color: var(--border-gold);
 }
 
-/* ===== REDIRECT OVERLAY ===== */
-.redirect-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(6, 7, 12, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-.redirect-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.redirect-card {
-  text-align: center;
-  max-width: 340px;
-  width: 100%;
-  animation: overlayPop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes overlayPop {
-  from { opacity: 0; transform: translateY(25px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.redirect-card .r-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 18px;
-  box-shadow: 0 6px 24px var(--gold-glow);
-}
-
-.redirect-card .r-icon svg {
-  width: 24px;
-  height: 24px;
-  color: var(--bg-deep);
-}
-
-.redirect-card h2 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 6px;
-}
-
-.redirect-card p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 22px;
-  line-height: 1.6;
-}
-
-.redirect-card .ov-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 13px 20px;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  color: var(--bg-deep);
-  text-decoration: none;
-  box-shadow: 0 6px 24px var(--gold-glow);
-  transition: all 0.25s ease;
-  animation: ctaPulse 2.4s ease-in-out infinite;
-}
-
-.redirect-card .ov-cta:hover {
-  transform: translateY(-2px);
-}
-
-.redirect-card .ov-cta:active {
-  transform: scale(0.97);
-}
-
-.redirect-card .ov-tg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  margin-top: 10px;
-  padding: 11px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 12px;
-  background: transparent;
-  color: var(--gold-light);
-  text-decoration: none;
-  border: 1.5px solid var(--border-gold);
-  transition: all 0.25s ease;
-}
-
-.redirect-card .ov-tg:hover {
-  background: rgba(212,175,55,0.06);
-  border-color: var(--gold);
-}
-
-.redirect-card .ov-copy {
-  margin-top: 12px;
-  padding: 9px 16px;
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 500;
-  border: 1px solid var(--border-subtle);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: "Poppins", sans-serif;
-}
-
-.redirect-card .ov-copy:hover {
-  background: rgba(255,255,255,0.05);
-  color: var(--text-secondary);
-}
-
-.redirect-card .ov-copy.copied {
-  background: rgba(212,175,55,0.08);
-  border-color: var(--border-gold);
-  color: var(--gold-light);
-}
-
-.redirect-card .ov-hint {
-  margin-top: 16px;
-  font-size: 10px;
-  color: var(--text-muted);
-  opacity: 0.6;
-  line-height: 1.6;
-}
-
 @media (max-width: 460px) {
   .wrapper {
     margin: 12px;
@@ -650,7 +436,6 @@ h1 {
   }
   h1 { font-size: 21px; }
   .features { gap: 6px; }
-  .cta-row { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -663,7 +448,6 @@ h1 {
 
 </style>
 
-<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -679,7 +463,6 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
 
 </head>
 
@@ -695,7 +478,6 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
 
 <div class="wrapper">
 
-  <!-- Profile — soft glow instead of spinning ring -->
   <div class="profile-section">
     <div class="profile-glow"></div>
     <div class="profile-border">
@@ -706,15 +488,16 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
   <h1>Pankaj Bhardwaj</h1>
   <div class="tagline">Learn More &bull; Earn More</div>
 
-  <!-- Main CTA -->
+  <!-- Single CTA — deeplink first, web fallback -->
   <div class="cta">
-    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" onclick="trackSubscribe()">
+    <button class="cta-btn" onclick="smartJoin()">
       <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855.075 1.644.418 1.955.34.31.7.534 1.01.71l.022.012 4.52 2.576c.379.716.848 1.602 1.19 2.246.207.378.373.677.483.87l.064.112.018.032c.21.37.486.672.85.863.366.192.737.21 1.066.132a1.96 1.96 0 0 0 .653-.295l.005-.004 2.38-1.923 3.024 2.633.018.015a2.08 2.08 0 0 0 1.536.438c.57-.066 1.015-.37 1.288-.695.27-.322.397-.67.456-.903l.003-.014 2.965-13.174c.141-.627.055-1.167-.19-1.574-.243-.404-.63-.637-1.002-.747a2.07 2.07 0 0 0-.562-.074z"/><path d="M14.5 14.5l-2 4" stroke-width="1.5"/></svg>
       Join Free Telegram Channel
-    </a>
+    </button>
+    <div class="cta-hint">Opens Telegram app if installed, otherwise browser</div>
   </div>
 
-  <!-- Timer — subtle style -->
+  <!-- Timer — deeplink with web fallback, no overlay -->
   <div class="timer-box">
     <div class="timer-text">
       Auto redirecting in <span id="countdown" class="timer-count">15</span> seconds
@@ -724,7 +507,6 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <!-- Features — 2x2 grid cards instead of checklist -->
   <div class="features">
     <div class="feature-card">
       <div class="f-icon">📊</div>
@@ -745,22 +527,6 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
       <div class="f-icon">🎓</div>
       <h3>100% Free</h3>
       <p>No Paid Services</p>
-    </div>
-  </div>
-
-  <!-- Secondary row -->
-  <div class="cta-row">
-    <div class="cta-secondary">
-      <a href="tg://join?invite=dLl4s-08kQ5kMjM1" onclick="trackSubscribe()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Open App
-      </a>
-    </div>
-    <div class="copy-wrap">
-      <button class="copy-btn" id="copyBtn" onclick="copyLink()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy Link
-      </button>
     </div>
   </div>
 
@@ -787,102 +553,44 @@ src="https://www.facebook.com/tr?id=1687207945872254&ev=PageView&noscript=1"
 
 </div>
 
-<!-- Overlay -->
-<div class="redirect-overlay" id="redirectOverlay">
-  <div class="redirect-card">
-    <div class="r-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.855.075 1.644.418 1.955.34.31.7.534 1.01.71l.022.012 4.52 2.576c.379.716.848 1.602 1.19 2.246.207.378.373.677.483.87l.064.112.018.032c.21.37.486.672.85.863.366.192.737.21 1.066.132a1.96 1.96 0 0 0 .653-.295l.005-.004 2.38-1.923 3.024 2.633.018.015a2.08 2.08 0 0 0 1.536.438c.57-.066 1.015-.37 1.288-.695.27-.322.397-.67.456-.903l.003-.014 2.965-13.174c.141-.627.055-1.167-.19-1.574-.243-.404-.63-.637-1.002-.747a2.07 2.07 0 0 0-.562-.074z"/><path d="M14.5 14.5l-2 4" stroke-width="1.5"/></svg>
-    </div>
-    <h2>You're Almost There!</h2>
-    <p>Tap below to join Pankaj Bhardwaj's free Telegram channel.</p>
-    <a href="https://t.me/+dLl4s-08kQ5kMjM1" target="_blank" rel="noopener" class="ov-cta" onclick="trackSubscribe()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      Tap to Join Channel
-    </a>
-    <a href="tg://join?invite=dLl4s-08kQ5kMjM1" class="ov-tg" onclick="trackSubscribe()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      Open in Telegram App
-    </a>
-    <button class="ov-copy" id="overlayCopyBtn" onclick="copyLinkOverlay()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      Copy Link & Open Manually
-    </button>
-    <div class="ov-hint">If nothing happens, copy the link and paste it in your browser or Telegram app</div>
-  </div>
-</div>
-
 <script>
-var TG_WEB_LINK = "https://t.me/+dLl4s-08kQ5kMjM1";
-var TG_APP_LINK = "tg://join?invite=dLl4s-08kQ5kMjM1";
-var redirectAttempted = false;
+var DEEPLINK = "tg://join?invite=dLl4s-08kQ5kMjM1";
+var WEBLINK = "https://t.me/+dLl4s-08kQ5kMjM1";
+var timerRedirected = false;
 
-/* ===== Meta Pixel Events ===== */
+/* Meta Pixel */
 function trackSubscribe() {
-  if (typeof fbq === 'function') {
-    fbq('track', 'Subscribe');
-  }
+  if (typeof fbq === 'function') fbq('track', 'Subscribe');
 }
-
 function trackLead() {
-  if (typeof fbq === 'function') {
-    fbq('track', 'Lead');
-  }
+  if (typeof fbq === 'function') fbq('track', 'Lead');
 }
 
-/* ===== Copy Link ===== */
-function copyLink() {
-  copyToClipboard(TG_WEB_LINK, document.getElementById("copyBtn"));
+/* Smart join: try deeplink, fallback to web after 1.5s */
+function smartJoin() {
+  trackSubscribe();
+  tryRedirect();
 }
 
-function copyLinkOverlay() {
-  copyToClipboard(TG_WEB_LINK, document.getElementById("overlayCopyBtn"));
-}
+function tryRedirect() {
+  if (timerRedirected) return;
+  timerRedirected = true;
 
-function copyToClipboard(text, btn) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() {
-      showCopied(btn);
-    }).catch(function() {
-      fallbackCopy(text, btn);
-    });
-  } else {
-    fallbackCopy(text, btn);
-  }
-}
+  /* Try deeplink first */
+  window.location.href = DEEPLINK;
 
-function fallbackCopy(text, btn) {
-  var ta = document.createElement("textarea");
-  ta.value = text;
-  ta.style.position = "fixed";
-  ta.style.left = "-9999px";
-  document.body.appendChild(ta);
-  ta.select();
-  try {
-    document.execCommand("copy");
-    showCopied(btn);
-  } catch(e) {
-    btn.textContent = "Failed";
-  }
-  document.body.removeChild(ta);
-}
-
-function showCopied(btn) {
-  var orig = btn.innerHTML;
-  btn.classList.add("copied");
-  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+  /* If deeplink fails (app not installed), fall back to web */
   setTimeout(function() {
-    btn.innerHTML = orig;
-    btn.classList.remove("copied");
-  }, 2000);
+    window.location.href = WEBLINK;
+  }, 1500);
 }
 
-/* ===== Timer + Smart Redirect ===== */
+/* Timer countdown — on zero, redirect via deeplink + web fallback */
 (function() {
   var TOTAL = 15;
   var seconds = TOTAL;
   var countdownEl = document.getElementById("countdown");
   var progressBar = document.getElementById("progressBar");
-  var overlay = document.getElementById("redirectOverlay");
 
   var timer = setInterval(function() {
     seconds--;
@@ -894,37 +602,17 @@ function showCopied(btn) {
       }, 300);
     }
     if (progressBar) {
-      var pct = Math.max(0, (seconds / TOTAL) * 100);
-      progressBar.style.width = pct + "%";
+      progressBar.style.width = Math.max(0, (seconds / TOTAL) * 100) + "%";
     }
     if (seconds <= 0) {
       clearInterval(timer);
       trackLead();
-      tryAutoRedirect(overlay);
+      tryRedirect();
     }
   }, 1000);
 })();
 
-function tryAutoRedirect(overlay) {
-  if (redirectAttempted) return;
-  redirectAttempted = true;
-
-  var f = document.createElement("iframe");
-  f.style.display = "none";
-  f.src = TG_APP_LINK;
-  document.body.appendChild(f);
-
-  setTimeout(function() {
-    window.location.href = TG_WEB_LINK;
-  }, 300);
-
-  setTimeout(function() {
-    if (f.parentNode) f.parentNode.removeChild(f);
-    if (overlay) overlay.classList.add("active");
-  }, 2000);
-}
-
-/* ===== Particles ===== */
+/* Particles */
 (function() {
   var canvas = document.getElementById("particles");
   var ctx = canvas.getContext("2d");
